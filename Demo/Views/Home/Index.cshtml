@@ -1,0 +1,106 @@
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="layout">
+    @using (Html.BeginForm())
+    {
+        <h1>Admin payslip application</h1>
+        <table>
+            <tr>
+                <td>Select employee(s): </td>
+                <td>
+                    <div id='container' style="margin: 10px auto; width:300px;">
+                        @Html.EJS().DropDownTree("ddt").Placeholder("Select an employee").CssClass("custom").ShowCheckBox(true).Fields(field =>
+        field.DataSource(ViewBag.DataSource).Value("EmpId").ParentValue("ReportingEmpId").Text("EmpName").HasChildren("HasTeam").Expanded("Expanded")
+        ).ItemTemplate("<div><img class=\"eimage\" src=\"https://ej2.syncfusion.com/demos/src/drop-down-tree/images/employees/${EmpImage}.png\" alt=\"${EmpImage}\" /><div><div class=\"ename\">${EmpName}</div><div class=\"ejob\">${Role}</div></div></div>").Value(ViewBag.Val).Render()
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.EJS().Button("btn").Content("Show").Render()</td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>
+<div class="layout">
+    @if (ViewBag.PayslipData != null)
+    {
+        <h2>Employee details</h2>
+        foreach (var CurData in ViewBag.PayslipData)
+        {
+            <h3>Employee</h3>
+            <table>
+                <tr>
+                    <td>Employee Name: </td>
+                    <td>@CurData.EmpName</td>
+                </tr>
+                <tr>
+                    <td>Employee Code: </td>
+                    <td>CMP - @CurData.EmpId</td>
+                </tr>
+                <tr>
+                    <td>Designation: </td>
+                    <td>@CurData.Role</td>
+                </tr>
+                <tr>
+                    <td>Date of joining: </td>
+                    <td>@CurData.Date</td>
+                </tr>
+                <tr>
+                    <td>Salary Earned: </td>
+                    <td>@CurData.Salary</td>
+                </tr>
+                <tr>
+                    <td>Deductions: </td>
+                    <td>@CurData.Deductions</td>
+                </tr>
+                <tr>
+                    <td>Net Salary: </td>
+                    <td>@CurData.NetSalary</td>
+                </tr>
+            </table>
+        }
+    }
+</div>
+<style>
+    /* Customizing the Dropdown Tree items */
+    .e-ddt.custom .e-treeview .e-fullrow {
+        height: 72px;
+    }
+
+    .e-ddt.custom .e-treeview .e-list-text {
+        line-height: normal;
+    }
+
+    .e-ddt.custom .e-treeview .e-list-parent.e-ul {
+        width: 100%;
+    }
+
+    .custom .eimage {
+        float: left;
+        padding: 11px 16px 11px 0;
+        height: 48px;
+        width: 48px;
+        box-sizing: content-box;
+    }
+
+    .custom .ename {
+        font-size: 16px;
+        padding: 14px 0 0;
+    }
+
+    .custom .ejob {
+        font-size: 14px;
+        color: #979A9C;
+        opacity: .87;
+        padding: 5px;
+    }
+    /* Application level styles */
+    .layout {
+        width: 49%;
+        float: left;
+        height: 500px;
+    }
+</style>
