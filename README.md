@@ -1,5 +1,6 @@
 # Dropdown-tree-organization-structure
-Repository: Sample ASP.NET MVC demo using Syncfusion DropDownTree to represent an organization structure.
+
+Sample ASP.NET MVC demo using Syncfusion DropDownTree to represent an organization structure.
 
 A quick getting started project to create an application with using the Dropdown Tree component in an organization structure.
 
